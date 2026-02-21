@@ -1,0 +1,517 @@
+﻿:root {
+  --bg-top: hsl(220 50% 11%);
+  --bg-bottom: hsl(232 45% 8%);
+  --card: hsl(222 36% 15% / 0.86);
+  --card-border: hsl(38 52% 70% / 0.22);
+  --text-main: hsl(44 52% 90%);
+  --text-soft: hsl(43 24% 74%);
+  --accent: hsl(41 78% 64%);
+  --accent-soft: hsl(38 72% 56% / 0.24);
+  --success: hsl(147 52% 54%);
+  --qaza: hsl(16 70% 58%);
+  --pending: hsl(220 14% 52%);
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 20px;
+  --radius-card: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  background: linear-gradient(165deg, var(--bg-top), var(--bg-bottom));
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, hsl(43 90% 74% / 0.1), transparent 42%),
+    radial-gradient(circle at 80% 12%, hsl(43 70% 65% / 0.12), transparent 34%),
+    radial-gradient(circle at 70% 70%, hsl(179 50% 40% / 0.08), transparent 36%);
+}
+
+.backdrop::before,
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(hsl(49 86% 86% / 0.35) 1px, transparent 1px);
+  background-size: 46px 46px;
+  opacity: 0.3;
+}
+
+.backdrop::after {
+  background-size: 62px 62px;
+  transform: rotate(10deg);
+  opacity: 0.16;
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(14px, 4vw, 24px) clamp(12px, 4vw, 26px) clamp(24px, 6vw, 36px);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.hero-card,
+.year-switcher-card,
+.timeline-card,
+.calendar-card,
+.stat-card {
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(8px);
+}
+
+.hero-card {
+  padding: clamp(16px, 4vw, 22px);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: -32px -60px auto auto;
+  width: 220px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid hsl(42 74% 72% / 0.24);
+  box-shadow: inset 0 0 0 24px hsl(42 80% 72% / 0.06), inset 0 0 0 44px hsl(42 80% 72% / 0.05);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--text-soft);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  line-height: 1.05;
+  margin-top: 6px;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: var(--text-soft);
+  font-size: clamp(0.86rem, 3.1vw, 0.95rem);
+  max-width: 42ch;
+}
+
+.hero-progress {
+  margin-top: var(--space-2);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: hsl(37 60% 60% / 0.12);
+  border: 1px solid hsl(40 90% 80% / 0.2);
+}
+
+.hero-progress span {
+  font-size: clamp(1.2rem, 4.5vw, 1.4rem);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.hero-progress small,
+.year-label,
+.gesture-tip {
+  color: var(--text-soft);
+}
+
+.year-switcher-card {
+  padding: var(--space-2);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.year-nav {
+  width: 44px;
+  height: 44px;
+  border: 1px solid hsl(42 56% 72% / 0.3);
+  border-radius: 14px;
+  background: hsl(226 26% 18%);
+  color: var(--text-main);
+  font-size: 1.2rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+.year-display {
+  text-align: center;
+  min-width: 0;
+}
+
+.year-label {
+  margin: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#selectedYearText {
+  font-size: clamp(1.5rem, 5vw, 1.9rem);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.year-badge {
+  margin-top: 6px;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  border: 1px solid hsl(40 88% 78% / 0.24);
+  background: hsl(37 74% 64% / 0.14);
+  color: var(--accent);
+}
+
+.year-badge.past {
+  color: var(--text-soft);
+  background: hsl(223 18% 26%);
+  border-color: hsl(225 17% 48% / 0.25);
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.section-title-row h2 {
+  font-size: clamp(1.2rem, 4.5vw, 1.45rem);
+}
+
+.timeline-card,
+.calendar-card {
+  padding: var(--space-2);
+}
+
+#percentBadge {
+  color: var(--accent);
+  font-weight: 700;
+  background: var(--accent-soft);
+  padding: 5px 10px;
+  border-radius: 999px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.crescent-line-scroll {
+  margin-top: var(--space-2);
+  overflow: hidden;
+}
+
+.crescent-line-inner {
+  position: relative;
+  width: 100%;
+  padding: 6px 0;
+}
+
+.progress-rail,
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 3px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.progress-rail {
+  width: 100%;
+  background: hsl(224 18% 30% / 0.9);
+}
+
+.progress-fill {
+  width: 0%;
+  background: linear-gradient(90deg, hsl(44 86% 70%), hsl(35 88% 60%));
+  box-shadow: 0 0 12px hsl(44 90% 70% / 0.45);
+  transition: width 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.crescent-timeline {
+  display: grid;
+  grid-template-columns: repeat(30, minmax(0, 1fr));
+  gap: clamp(1px, 0.55vw, 5px);
+  align-items: center;
+  position: relative;
+}
+
+.crescent {
+  position: relative;
+  width: clamp(8px, 2.6vw, 14px);
+  height: clamp(8px, 2.6vw, 14px);
+  margin: 0 auto;
+  border-radius: 50%;
+  background: hsl(222 14% 26% / 0.95);
+  box-shadow: inset 0 0 0 1px hsl(43 40% 70% / 0.2);
+  transition: transform 220ms ease, background-color 260ms ease, box-shadow 260ms ease;
+}
+
+.crescent::after {
+  content: "";
+  position: absolute;
+  width: 68%;
+  aspect-ratio: 1;
+  top: 16%;
+  left: 36%;
+  border-radius: 50%;
+  background: var(--card);
+}
+
+.crescent.done {
+  background: linear-gradient(150deg, hsl(49 96% 76%), hsl(35 90% 61%));
+  box-shadow:
+    0 0 10px hsl(46 92% 73% / 0.45),
+    inset 0 0 0 1px hsl(48 90% 84% / 0.45);
+  animation: rise 260ms ease;
+}
+
+.crescent.done::after {
+  background: hsl(228 28% 15%);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-1);
+}
+
+.stat-card {
+  padding: clamp(10px, 2.6vw, 14px);
+  text-align: center;
+  min-width: 0;
+}
+
+.stat-card p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: clamp(0.7rem, 2.5vw, 0.82rem);
+}
+
+.stat-card h3 {
+  margin-top: 7px;
+  font-size: clamp(1.1rem, 5.2vw, 1.55rem);
+  transition: transform 220ms ease;
+  line-height: 1.05;
+}
+
+.stat-card h3.bump {
+  transform: scale(1.08);
+}
+
+.gesture-tip {
+  margin: 0;
+  width: 100%;
+  font-size: clamp(0.68rem, 2.4vw, 0.76rem);
+  text-align: left;
+}
+
+.calendar-grid {
+  margin-top: var(--space-2);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-1);
+}
+
+.day-card {
+  border: 1px solid hsl(42 48% 64% / 0.18);
+  border-radius: 16px;
+  background: hsl(226 22% 16% / 0.96);
+  color: var(--text-main);
+  padding: 10px 6px;
+  min-height: clamp(72px, 20vw, 86px);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 6px;
+  touch-action: pan-y;
+  transition: transform 180ms ease, box-shadow 200ms ease, border-color 180ms ease;
+}
+
+.day-card:active {
+  transform: scale(0.97);
+}
+
+.day-card.completed {
+  border-color: hsl(48 84% 73% / 0.72);
+  box-shadow: 0 10px 18px hsl(44 90% 67% / 0.18);
+}
+
+.day-card.qaza {
+  border-color: hsl(16 80% 65% / 0.72);
+  box-shadow: 0 8px 14px hsl(14 80% 55% / 0.18);
+}
+
+.day-label {
+  font-size: clamp(0.7rem, 2.8vw, 0.82rem);
+  color: var(--text-soft);
+}
+
+.day-status {
+  font-weight: 700;
+  font-size: clamp(0.64rem, 2.5vw, 0.76rem);
+  text-align: center;
+}
+
+.day-card.pending .day-status {
+  color: var(--pending);
+}
+
+.day-card.completed .day-status {
+  color: var(--success);
+}
+
+.day-card.qaza .day-status {
+  color: var(--qaza);
+}
+
+.check-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid hsl(39 40% 70% / 0.3);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.check-indicator::before {
+  content: "";
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.day-card.completed .check-indicator {
+  background: hsl(140 43% 46%);
+  border-color: hsl(146 60% 70% / 0.7);
+}
+
+.day-card.completed .check-indicator::before {
+  border-left-color: hsl(0 0% 100%);
+  border-bottom-color: hsl(0 0% 100%);
+}
+
+.day-card.pulse {
+  animation: pulse 360ms ease;
+}
+
+.app-footer {
+  margin-top: 4px;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  border-top: 1px solid hsl(43 30% 72% / 0.14);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-footer p {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: clamp(0.68rem, 2.2vw, 0.78rem);
+  color: hsl(43 20% 72% / 0.88);
+  letter-spacing: 0.015em;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.footer-mark {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.94); }
+  55% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+@keyframes rise {
+  0% { transform: translateY(4px) scale(0.85); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 360px) {
+  .hero-progress {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 480px) {
+  .calendar-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) {
+  .app-shell {
+    gap: var(--space-3);
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .crescent-timeline {
+    gap: clamp(6px, 0.8vw, 10px);
+  }
+
+  .gesture-tip {
+    width: auto;
+    text-align: right;
+  }
+}

@@ -1,0 +1,89 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shere Ramadan ul Moazam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="backdrop"></div>
+  <main class="app-shell" aria-label="Shere Ramadan ul Moazam Roza Tracker">
+    <header class="hero-card">
+      <div class="hero-pattern" aria-hidden="true"></div>
+      <p class="eyebrow">Ramadan History Tracker</p>
+      <h1>Shere Ramadan ul Moazam</h1>
+      <p class="subtitle">Track and revisit your Roza progress year by year in Hijri calendar.</p>
+      <div class="hero-progress">
+        <span id="completedCount">0</span>
+        <small>of 30 Rozas completed</small>
+      </div>
+    </header>
+
+    <section id="yearSwitcher" class="year-switcher-card" aria-label="Hijri Year Selector">
+      <button id="prevYearBtn" type="button" class="year-nav" aria-label="Previous Hijri year">&#8592;</button>
+      <div class="year-display">
+        <p class="year-label">Hijri Ramadan Year</p>
+        <h2 id="selectedYearText">1447 AH</h2>
+        <span id="yearBadge" class="year-badge">Current Year</span>
+      </div>
+      <button id="nextYearBtn" type="button" class="year-nav" aria-label="Next Hijri year">&#8594;</button>
+    </section>
+
+    <section class="timeline-card" aria-label="Crescent Progress Timeline">
+      <div class="section-title-row">
+        <h2>Crescent Progress Timeline</h2>
+        <span id="percentBadge">0%</span>
+      </div>
+      <div class="crescent-line-scroll">
+        <div class="crescent-line-inner">
+          <div class="progress-rail" aria-hidden="true"></div>
+          <div id="timelineFill" class="progress-fill" aria-hidden="true"></div>
+          <div id="crescentTimeline" class="crescent-timeline" role="list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Completion Analytics">
+      <article class="stat-card">
+        <p>Total Completed</p>
+        <h3 id="statCompleted">0</h3>
+      </article>
+      <article class="stat-card">
+        <p>Current Streak</p>
+        <h3 id="statStreak">0</h3>
+      </article>
+      <article class="stat-card">
+        <p>Completion %</p>
+        <h3 id="statPercent">0%</h3>
+      </article>
+    </section>
+
+    <section class="calendar-card">
+      <div class="section-title-row">
+        <h2 id="calendarTitle">Ramadan Tracker</h2>
+        <p class="gesture-tip">Swipe right: Completed • Swipe left: Pending • Long press: Qaza</p>
+      </div>
+      <div id="calendarGrid" class="calendar-grid" role="list"></div>
+    </section>
+
+    <footer class="app-footer" aria-label="Footer">
+      <p><span class="footer-mark" aria-hidden="true">&copy;</span> Abdulqadir Co. All rights reserved</p>
+    </footer>
+  </main>
+
+  <template id="dayTemplate">
+    <button class="day-card" type="button" role="listitem">
+      <span class="day-label"></span>
+      <span class="day-status"></span>
+      <span class="check-indicator" aria-hidden="true"></span>
+    </button>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
